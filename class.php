@@ -16,11 +16,13 @@ public $conn;
 
 // Standard konstruktor
 public function __Construct() {
+ //För anslutningen, privata medlemmarna ska anges som parametrar.
 $this->conn = new mysqli($this->host,$this->username,$this->password,$this->dbName);
+   // Villkor om det blir error
 if(mysqli_connect_error())
-{
+{     // Använd funktionern trigger_error för att informerar om error
    trigger_error('Fel med databas anlutningen'.mysqli_connect_error());
-}
+} 
 else {   // Konstruktor funktionen returnerar anslutningen
    return $this->conn;
 }
@@ -35,17 +37,20 @@ if(!isset($rand1) || $rand2 != $rand1) {
 header("Location:contact.php?contact=error1");
 exit();
 }
-// Referenser
-$name = $_POST['name'];
-$email = $_POST['email'];
-$telephone = $_POST['telephone'];
-$message = $_POST['message'];
-$subject = $_POST['subject'];
-$address = $_POST['address'];
-$zip = $_POST['zip'];
-$city = $_POST['city'];
-$country = $_POST['country'];
-$date =  $_POST['date'];
+// Referenserna
+$name = $_POST['name']; // Referens till namnet
+$email = $_POST['email'];  // Referens till mail
+$telephone = $_POST['telephone']; // Referens telefon
+$message = $_POST['message']; // Referens meddelandet
+$subject = $_POST['subject']; // Referens ämne
+$address = $_POST['address']; // Referens till adress
+$zip = $_POST['zip']; // Referens till postnr
+$city = $_POST['city'];  // Referens till stad
+$country = $_POST['country']; // Referens till land
+$date =  $_POST['date']; // Referens till datum
+// Har tittat på 
+// https://www.w3schools.com/php/php_mysql_prepared_statements.asp
+// för prepare() och bind_param()
 $result = $this->conn->prepare("INSERT INTO tbcontact(name ,email, message, subject, telephone ,address, zip ,city ,country,date) VALUES(?,?,?,?,?,?,?,?,?,?)");
 $result->bind_param("ssssssssss", $name ,$email, $message, $subject, $telephone ,$address, $zip ,$city ,$country, $date);
 $result->execute();
