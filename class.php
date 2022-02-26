@@ -1,7 +1,14 @@
-<?php // Skapa en klass
+<?php
+/*
+diyar.parwana@gmail.com
+PHP OOP
+https://www.php.net/manual/en/mysqli.construct.php
+*/
+
+// Skapa en klass
 Class Contact
 { // Deklarera privata data medlemmar
-private $host ='ltu.se:3308';
+private $host ='host';
 private $username  ='diypar1';
 private $password ='';
 private $dbName ='';
